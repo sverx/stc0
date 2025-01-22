@@ -1,0 +1,14 @@
+STC0 simple tile compressor
+
+one byte holds information on how to create a group of 4 bytes, providing two bits for each:
+
+    D7 D6          D5 D4            D3 D2          D1 D0
+ 
+   1st byte       2nd byte         3rd byte       4th byte
+
+
+0b10 -> byte has value 0x00
+0b11 -> byte has value 0xFF
+0b01 -> byte is a different value, uncompressed byte follows
+0b00 -> repeat last uncompressed value from same group of 4 bytes / end of stream if on D7,D6 (so setting a whole byte to 0x00 works)
+
